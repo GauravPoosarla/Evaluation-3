@@ -16,6 +16,7 @@ const EventCardClicked = ({ event, handleCardClicked }) => {
   const [isBookmarked, setIsBookmarked] = useState(event.isBookmarked);
   const [isChecked, setIsChecked] = useState(event.isRegistered);
   const { theme, setTheme } = useContext(Theme);
+  const [result, setResult] = useState('Registered');
 
   const bookmarkHandler = () => {
     if (!isBookmarked) {
@@ -82,8 +83,9 @@ const EventCardClicked = ({ event, handleCardClicked }) => {
           onClick={bookmarkHandler}
         />
       </div>
+
       <div className='btn'>
-        <button onClick={checkHandler}> </button>
+        <button onClick={checkHandler}>{result}</button>
       </div>
     </div>
   );
