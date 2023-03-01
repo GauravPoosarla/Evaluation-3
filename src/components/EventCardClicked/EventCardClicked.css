@@ -1,14 +1,6 @@
-.event-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 200px;
-  height: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  color: white;
-  border-radius: 10px;
+.event-card-clicked {
+  padding-left: 300px;
+  padding-right: 300px;
 }
 
 .event-card-image img{
@@ -75,13 +67,5 @@
 }
 
 .event-card-footer .unbookmarked {
-  color: white;
-}
-
-.event-card-footer .checked {
-  color: green;
-}
-
-.event-card-footer .unchecked {
   color: white;
 }

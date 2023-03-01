@@ -9,11 +9,13 @@ import PropTypes from 'prop-types';
 // import makeRequest from '../../utils/makeRequest';
 // import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
 import axios from 'axios';
+import { Theme } from '../../contexts/Theme';
+import { useContext } from 'react';
 
-const EventCard = ({ event }) => {
-  console.log(event.isRegistered);
+const EventCard = ({ event, handleCardClicked }) => {
   const [isBookmarked, setIsBookmarked] = useState(event.isBookmarked);
   const [isChecked, setIsChecked] = useState(event.isRegistered);
+  const { theme, setTheme } = useContext(Theme);
 
   const bookmarkHandler = () => {
     if (!isBookmarked) {
@@ -39,9 +41,25 @@ const EventCard = ({ event }) => {
     }
   };
 
+  const checkHandler = () => {
+    if (!isChecked) {
+      axios.patch(`http://localhost:8000/api/events/${event.id}`, { isRegistered: true }).then(response => {
+        setIsChecked(!isChecked);
+      });
+    } else {
+      axios.patch(`http://localhost:8000/api/events/${event.id}`, { isRegistered: false }).then(response => {
+        setIsChecked(!isChecked);
+      });
+    }
+  };
+
   return (
-    <div className='event-card'>
-      <div className='event-card-image'>
+    <div className='event-card' style={{ backgroundColor: theme.currTheme }}>
+      <div
+        className='event-card-image'
+        onClick={() => {
+          handleCardClicked(event);
+        }}>
         <img src={event.imgUrl} alt={event.name} />
       </div>
       <div className='event-card-content'>
@@ -56,11 +74,8 @@ const EventCard = ({ event }) => {
         </p>
       </div>
       <div className='event-card-footer'>
-        <FontAwesomeIcon
-          icon={faCircleCheck}
-          className={isChecked ? 'checked' : 'unchecked'}
-          onClick={() => setIsChecked(!isChecked)}
-        />
+        <FontAwesomeIcon icon={faCircleCheck} className={isChecked ? 'checked' : 'unchecked'} onClick={checkHandler} />
+        {isChecked ? <p>Registered</p> : <p></p>}
         <FontAwesomeIcon
           icon={faBookmark}
           className={isBookmarked ? 'bookmarked' : 'unbookmarked'}
