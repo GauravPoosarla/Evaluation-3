@@ -1,0 +1,8 @@
+.body-event-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 300px;
+  padding-right: 300px;
+  gap: 50px;
+}

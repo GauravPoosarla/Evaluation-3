@@ -1,0 +1,81 @@
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 200px;
+  height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+}
+
+.event-card-image img{
+  width: 200px;
+  height: 150px;
+  border-bottom: 0.5px solid white;
+  border-radius: 10px 10px 0 0;
+}
+
+.event-card-content {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.event-card-content-name {
+  height: 30px;
+  font-family: 'Big Shoulders Text', cursive;
+  font-size: 20px;
+  text-align: center;
+}
+
+.event-card-content-description {
+  height: 35px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.event-card-content-venue {
+  height: 10px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.event-card-content-date {
+  height: 10px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+.event-card-footer {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.event-card-footer .bookmarked {
+  color: red;
+}
+
+.event-card-footer .unbookmarked {
+  color: white;
+}

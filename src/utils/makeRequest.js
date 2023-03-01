@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { BACKEND_URL } from '../constants/apiEndPoint';
+import { BACKEND_URL } from '../constants/apiEndPoints';
 
-const makeRequest = async ({ url, method }, dynamicConfig, navigate) => {
+const makeRequest = async ({ url, method }, dynamicConfig) => {
   try {
     const response = await axios({
       baseURL: BACKEND_URL,
@@ -12,7 +12,8 @@ const makeRequest = async ({ url, method }, dynamicConfig, navigate) => {
     return response.data;
   } catch (error) {
     if (error.response.status) {
-      navigate('/error');
+      console.log(error);
+      // navigate('/error');
     }
   }
 };
