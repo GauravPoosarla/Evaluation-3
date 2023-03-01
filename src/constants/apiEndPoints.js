@@ -14,3 +14,13 @@ export const UPDATE_EVENT_DATA = id => ({
   url: `${BACKEND_URL}/api/events/${id}`,
   method: 'PATCH',
 });
+
+export const GET_THEMES = () => ({
+  url: `${BACKEND_URL}/api/themes`,
+  method: 'GET',
+});
+
+export const PUT_THEME = () => ({
+  url: `${BACKEND_URL}/api/themes`,
+  method: 'PUT',
+});
