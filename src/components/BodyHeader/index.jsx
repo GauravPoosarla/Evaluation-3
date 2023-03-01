@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faChevronUp, faMagnifyingGlass, faCircle, faCircleDot } from '@fortawesome/free-solid-svg-icons';
 import './BodyHeader.css';
+import PropTypes from 'prop-types';
 
 const BodyHeader = props => {
   const { handleFilterClicked } = props;
@@ -47,6 +48,10 @@ const BodyHeader = props => {
       </div>
     </div>
   );
+};
+
+BodyHeader.propTypes = {
+  handleFilterClicked: PropTypes.func.isRequired,
 };
 
 export default BodyHeader;

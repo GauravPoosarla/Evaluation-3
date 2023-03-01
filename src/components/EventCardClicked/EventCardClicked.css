@@ -1,71 +1,101 @@
 .event-card-clicked {
-  padding-left: 300px;
-  padding-right: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: 700px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.26);
+  color: white;
+  margin-left: 400px;
+  margin-top: 50px;
+  margin-bottom: 100px;
 }
 
-.event-card-image img{
-  width: 200px;
-  height: 150px;
+.event-card-image-clicked img{
+  width: 400px;
+  height: 350px;
   border-bottom: 0.5px solid white;
   border-radius: 10px 10px 0 0;
 }
 
-.event-card-content {
-  height: 150px;
+.event-card-content-clicked {
+  height: 250px;
   display: flex;
   flex-direction: column;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.event-card-content-name {
-  height: 30px;
+.event-card-content-name-clicked {
+  height: 50px;
   font-family: 'Big Shoulders Text', cursive;
+  font-size: 30px;
+  text-align: center;
+}
+
+.event-card-content-description-clicked {
+  height: 175px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 15px;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+}
+
+.event-card-content-venue-clicked {
+  height: 10px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.event-card-content-date-clicked {
+  height: 20px;
+  font-family: 'Sofia Sans', sans-serif;
   font-size: 20px;
   text-align: center;
 }
 
-.event-card-content-description {
-  height: 35px;
-  font-family: 'Sofia Sans', sans-serif;
-  font-size: 10px;
-  text-align: center;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-
-.event-card-content-venue {
-  height: 10px;
-  font-family: 'Sofia Sans', sans-serif;
-  font-size: 10px;
-  text-align: center;
-  padding-bottom: 10px;
-}
-
-.event-card-content-date {
-  height: 10px;
-  font-family: 'Sofia Sans', sans-serif;
-  font-size: 10px;
-  text-align: center;
-}
-
-.event-card-footer {
-  height: 50px;
+.event-card-footer-clicked {
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.event-card-footer .bookmarked {
-  color: red;
+.event-card-footer-clicked .bookmarked {
+  color: #EA8282;
 }
 
-.event-card-footer .unbookmarked {
+.event-card-footer-clicked .unbookmarked {
   color: white;
 }
+
+.checked{
+  color: #A0F3AD ;
+}
+
+.unchecked{
+  color: white;
+}
+
+.btn{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+
+.btn button{
+      padding: 10px 20px;
+      background-color: #FFFFFF;
+      border-radius: 15px;
+  }

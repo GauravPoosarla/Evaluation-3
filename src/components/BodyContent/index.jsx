@@ -5,6 +5,7 @@ import { GET_EVENTS_DATA } from '../../constants/apiEndPoints';
 import makeRequest from '../../utils/makeRequest';
 import { EventDataContext } from '../../contexts/EventData';
 import EventCard from '../EventCard';
+import EventCardClicked from '../EventCardClicked';
 import './BodyContent.css';
 import { useState } from 'react';
 import { Theme } from '../../contexts/Theme';
@@ -48,7 +49,7 @@ const BodyContent = () => {
   }, []);
 
   if (isClicked.id) {
-    return <EventCard event={isClicked} />;
+    return <EventCardClicked event={isClicked} />;
   } else {
     return (
       <div>
@@ -62,4 +63,5 @@ const BodyContent = () => {
     );
   }
 };
+
 export default BodyContent;
