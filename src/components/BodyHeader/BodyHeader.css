@@ -1,0 +1,34 @@
+.body-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.search-header input{
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.207);
+  width: 150px;
+  margin-right: 5px;
+}
+
+.filter-buttons {
+  padding-right: 100px;
+  padding-left: 100px;
+}
+
+.filter-buttons-level {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.filter-buttons-content {
+  display: flex;
+  gap: 5px;
+}
+
+
