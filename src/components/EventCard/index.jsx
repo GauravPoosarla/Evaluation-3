@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React from 'react';
 import { useState } from 'react';
-import { faCircleCheck, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faBookmark, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import { getFormattedDateFromUtcDate } from '../../utils/common';
 import './EventCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-// import makeRequest from '../../utils/makeRequest';
-// import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
+import makeRequest from '../../utils/makeRequest';
+import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
 import axios from 'axios';
 import { Theme } from '../../contexts/Theme';
 import { useContext } from 'react';
@@ -19,23 +19,11 @@ const EventCard = ({ event, handleCardClicked }) => {
 
   const bookmarkHandler = () => {
     if (!isBookmarked) {
-      // makeRequest(
-      //   UPDATE_EVENT_DATA(event.id, {
-      //     data: { isBookmarked: true },
-      //   })
-      // ).then(response => {
-      //   console.log(response);
-      //   setIsBookmarked(!isBookmarked);
-      // });
-      axios.patch(`http://localhost:8000/api/events/${event.id}`, { isBookmarked: true }).then(response => {
+      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isBookmarked: true } }).then(response => {
         setIsBookmarked(!isBookmarked);
       });
     } else {
-      // makeRequest(UPDATE_EVENT_DATA(event.id, { isBookmarked: false })).then(response => {
-      //   console.log(response);
-      //   setIsBookmarked(!isBookmarked);
-      // });
-      axios.patch(`http://localhost:8000/api/events/${event.id}`, { isBookmarked: false }).then(response => {
+      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isBookmarked: false } }).then(response => {
         setIsBookmarked(!isBookmarked);
       });
     }
@@ -74,8 +62,13 @@ const EventCard = ({ event, handleCardClicked }) => {
         </p>
       </div>
       <div className='event-card-footer'>
-        <FontAwesomeIcon icon={faCircleCheck} className={isChecked ? 'checked' : 'unchecked'} onClick={checkHandler} />
-        {isChecked ? <p>Registered</p> : <p></p>}
+        {event.areSeatsAvailable ? (
+          <FontAwesomeIcon icon={faCircleCheck} className={isChecked ? 'checked' : ''} onClick={checkHandler} />
+        ) : (
+          <FontAwesomeIcon icon={faXmarkCircle} className='unavailable' />
+        )}
+        {isChecked ? <p style={{ color: 'green' }}>Registered</p> : <p></p>}
+        {event.areSeatsAvailable ? <p></p> : <p style={{ color: 'yellow' }}>Seats Unavailable</p>}
         <FontAwesomeIcon
           icon={faBookmark}
           className={isBookmarked ? 'bookmarked' : 'unbookmarked'}

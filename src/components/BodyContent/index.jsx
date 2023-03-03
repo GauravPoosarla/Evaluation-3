@@ -11,23 +11,33 @@ import { useState } from 'react';
 import { Theme } from '../../contexts/Theme';
 import { GET_THEMES } from '../../constants/apiEndPoints';
 import BodyHeader from '../BodyHeader';
+import PropTypes from 'prop-types';
 
-const BodyContent = () => {
+const BodyContent = props => {
+  const { isClicked, setIsClicked } = props;
   const { events, setEvents } = useContext(EventDataContext);
-  const [isClicked, setIsClicked] = useState({});
   const { theme, setTheme } = React.useContext(Theme);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [inputFilter, setInputFilter] = useState('');
 
   const handleCardClicked = event => {
     setIsClicked(event);
   };
 
-  const handleFilterClicked = event => {
-    const input = event.target.value;
+  const handleSearchClicked = () => {
     const filteredEvents = events.filter(event => {
-      return event.name.toLowerCase().includes(input.toLowerCase());
+      return event.name.toLowerCase().includes(inputFilter.toLowerCase());
     });
     setFilteredEvents(filteredEvents);
+  };
+
+  const handleFilterClicked = event => {
+    const input = event.target.value;
+    // const filteredEvents = events.filter(event => { // dynamic search
+    //   return event.name.toLowerCase().includes(input.toLowerCase());
+    // });
+    // setFilteredEvents(filteredEvents);
+    setInputFilter(input);
   };
 
   useEffect(() => {
@@ -40,8 +50,9 @@ const BodyContent = () => {
   useEffect(() => {
     makeRequest(GET_THEMES())
       .then(response => {
-        console.log(response);
-        setTheme({ ...response, currTheme: response['themes'][response['preferredThemeId']].colorHexCode });
+        const preferredThemeId = response['preferredThemeId'];
+        const currTheme = response.themes.filter(theme => theme.id === preferredThemeId)[0].colorHexCode;
+        setTheme({ ...response, currTheme });
       })
       .catch(error => {
         console.log(error);
@@ -53,7 +64,7 @@ const BodyContent = () => {
   } else {
     return (
       <div>
-        <BodyHeader handleFilterClicked={handleFilterClicked} />
+        <BodyHeader handleFilterClicked={handleFilterClicked} handleSearchClicked={handleSearchClicked} />
         <div className='body-event-cards'>
           {filteredEvents.map(event => (
             <EventCard key={event.id} event={event} handleCardClicked={handleCardClicked} />
@@ -62,6 +73,11 @@ const BodyContent = () => {
       </div>
     );
   }
+};
+
+BodyContent.propTypes = {
+  isClicked: PropTypes.object,
+  setIsClicked: PropTypes.func,
 };
 
 export default BodyContent;

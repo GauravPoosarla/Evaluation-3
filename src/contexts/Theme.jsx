@@ -3,6 +3,6 @@
 import React from 'react';
 export const Theme = React.createContext({});
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = React.useState({});
+  const [theme, setTheme] = React.useState({ currTheme: 'black' });
   return <Theme.Provider value={{ theme, setTheme }}>{children}</Theme.Provider>;
 };

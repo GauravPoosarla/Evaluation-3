@@ -5,7 +5,7 @@ import './BodyHeader.css';
 import PropTypes from 'prop-types';
 
 const BodyHeader = props => {
-  const { handleFilterClicked } = props;
+  const { handleFilterClicked, handleSearchClicked } = props;
 
   return (
     <div className='body'>
@@ -20,7 +20,7 @@ const BodyHeader = props => {
         <div className='search'>
           <div className='search-header'>
             <input type='text' placeholder='Event Name' onChange={handleFilterClicked} />
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSearchClicked} />
           </div>
         </div>
       </div>
@@ -52,6 +52,7 @@ const BodyHeader = props => {
 
 BodyHeader.propTypes = {
   handleFilterClicked: PropTypes.func.isRequired,
+  handleSearchClicked: PropTypes.func.isRequired,
 };
 
 export default BodyHeader;

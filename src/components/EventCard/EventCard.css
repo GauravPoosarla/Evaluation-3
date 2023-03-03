@@ -71,7 +71,7 @@
 }
 
 .event-card-footer .bookmarked {
-  color: red;
+  color: #EA8282;
 }
 
 .event-card-footer .unbookmarked {
@@ -82,6 +82,6 @@
   color: green;
 }
 
-.event-card-footer .unchecked {
-  color: white;
+.event-card-footer .unavailable {
+  color: yellow;
 }

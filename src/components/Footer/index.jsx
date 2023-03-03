@@ -10,7 +10,8 @@ function FooterComponent() {
   if (theme['themes']) {
     const setThemeHandler = async () => {
       const reqData = theme.themes.findIndex(item => item.colorHexCode === theme.currTheme);
-      await makeRequest(PUT_THEME, { preferredThemeId: reqData });
+      const id = theme.themes[reqData].id;
+      await makeRequest(PUT_THEME(), { data: { preferredThemeId: id } });
     };
     const handleThemeChange = event => {
       setTheme({ ...theme, currTheme: event.target.id });
