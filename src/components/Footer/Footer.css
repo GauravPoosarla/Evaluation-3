@@ -1,4 +1,4 @@
-footer{
+.footer{
     padding: 5px;
     display: flex;
     flex-direction: row;
@@ -11,6 +11,27 @@ footer{
     height: 50px;
     padding-left: 250px;
     position: fixed;
+}
+
+.theme-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 55%;
+}
+
+.themes {
+    display: flex;
+    gap: 10px;
+    padding-left: 50px;
+}
+
+.themes-header {
+    font-size: 20px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    font-family: 'Sofia Sans', sans-serif;
 }
 
 .theme-purple{
@@ -38,7 +59,8 @@ footer{
 
 .save-theme{
     border-radius: 10px;
-    padding: 10px 10px;
+    padding: 5px;
     background-color: #fff;
-    font-size: 10px;
+    height: 40px;
+    width: 100px;
 }

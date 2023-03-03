@@ -20,17 +20,6 @@ const BodyContent = props => {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [inputFilter, setInputFilter] = useState('');
 
-  const handleCardClicked = event => {
-    setIsClicked(event);
-  };
-
-  const handleSearchClicked = () => {
-    const filteredEvents = events.filter(event => {
-      return event.name.toLowerCase().includes(inputFilter.toLowerCase());
-    });
-    setFilteredEvents(filteredEvents);
-  };
-
   const handleFilterClicked = event => {
     const input = event.target.value;
     // const filteredEvents = events.filter(event => { // dynamic search
@@ -38,6 +27,42 @@ const BodyContent = props => {
     // });
     // setFilteredEvents(filteredEvents);
     setInputFilter(input);
+  };
+
+  const handleSearchClicked = event => {
+    event.preventDefault();
+    const trimmedInput = inputFilter.trim();
+    setInputFilter(trimmedInput);
+    const filteredEvents = events.filter(event => {
+      return event.name.toLowerCase().includes(inputFilter.toLowerCase());
+    });
+    setFilteredEvents(filteredEvents);
+  };
+
+  const handleCardClicked = event => {
+    setIsClicked(event);
+  };
+
+  const radioFilter = event => {
+    const clickedButton = event.target.value;
+    if (clickedButton === 'all') {
+      return setFilteredEvents(events);
+    } else if (clickedButton === 'registered') {
+      const filteredEvents = events.filter(event => {
+        return event.isRegistered === true;
+      });
+      setFilteredEvents(filteredEvents);
+    } else if (clickedButton === 'bookmarked') {
+      const filteredEvents = events.filter(event => {
+        return event.isBookmarked === true;
+      });
+      setFilteredEvents(filteredEvents);
+    } else if (clickedButton === 'seat-available') {
+      const filteredEvents = events.filter(event => {
+        return event.areSeatsAvailable === true;
+      });
+      setFilteredEvents(filteredEvents);
+    }
   };
 
   useEffect(() => {
@@ -52,6 +77,7 @@ const BodyContent = props => {
       .then(response => {
         const preferredThemeId = response['preferredThemeId'];
         const currTheme = response.themes.filter(theme => theme.id === preferredThemeId)[0].colorHexCode;
+
         setTheme({ ...response, currTheme });
       })
       .catch(error => {
@@ -64,7 +90,11 @@ const BodyContent = props => {
   } else {
     return (
       <div>
-        <BodyHeader handleFilterClicked={handleFilterClicked} handleSearchClicked={handleSearchClicked} />
+        <BodyHeader
+          handleFilterClicked={handleFilterClicked}
+          handleSearchClicked={handleSearchClicked}
+          radioFilter={radioFilter}
+        />
         <div className='body-event-cards'>
           {filteredEvents.map(event => (
             <EventCard key={event.id} event={event} handleCardClicked={handleCardClicked} />

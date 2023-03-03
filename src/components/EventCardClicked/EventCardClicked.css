@@ -79,7 +79,7 @@
 }
 
 .checked{
-  color: #A0F3AD ;
+  color: green ;
 }
 
 .unchecked{
@@ -94,8 +94,12 @@
   height: 20%;
 }
 
+.footer-registration {
+  padding-left: 60px;
+}
+
 .btn button{
       padding: 10px 20px;
       background-color: #FFFFFF;
       border-radius: 15px;
-  }
+}

@@ -85,3 +85,7 @@
 .event-card-footer .unavailable {
   color: yellow;
 }
+
+.event-card-registration {
+  padding-left: 20px;
+}

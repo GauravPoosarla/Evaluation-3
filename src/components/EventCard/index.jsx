@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import makeRequest from '../../utils/makeRequest';
 import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
-import axios from 'axios';
 import { Theme } from '../../contexts/Theme';
 import { useContext } from 'react';
 
@@ -27,18 +26,20 @@ const EventCard = ({ event, handleCardClicked }) => {
         setIsBookmarked(!isBookmarked);
       });
     }
+    window.location.reload();
   };
 
   const checkHandler = () => {
     if (!isChecked) {
-      axios.patch(`http://localhost:8000/api/events/${event.id}`, { isRegistered: true }).then(response => {
+      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isRegistered: true } }).then(response => {
         setIsChecked(!isChecked);
       });
     } else {
-      axios.patch(`http://localhost:8000/api/events/${event.id}`, { isRegistered: false }).then(response => {
+      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isRegistered: false } }).then(response => {
         setIsChecked(!isChecked);
       });
     }
+    window.location.reload();
   };
 
   return (
@@ -67,7 +68,13 @@ const EventCard = ({ event, handleCardClicked }) => {
         ) : (
           <FontAwesomeIcon icon={faXmarkCircle} className='unavailable' />
         )}
-        {isChecked ? <p style={{ color: 'green' }}>Registered</p> : <p></p>}
+        {isChecked ? (
+          <p className={'event-card-registration'} style={{ color: 'green' }}>
+            Registered
+          </p>
+        ) : (
+          <p></p>
+        )}
         {event.areSeatsAvailable ? <p></p> : <p style={{ color: 'yellow' }}>Seats Unavailable</p>}
         <FontAwesomeIcon
           icon={faBookmark}
