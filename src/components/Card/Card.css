@@ -79,11 +79,11 @@
 }
 
 .event-card-footer .checked {
-  color: green;
+  color: #a0f3ad;
 }
 
 .event-card-footer .unavailable {
-  color: yellow;
+  color: #ececab;
 }
 
 .event-card-registration {
@@ -94,7 +94,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: green;
+  color: #a0f3ad;
 }
 
 .event-details .event-card {

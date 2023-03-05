@@ -58,7 +58,7 @@ const Card = ({ event, isBookmarked, bookmarkHandler, isEventPage }) => {
         </p>
       </div>
       <div className='event-card-footer'>
-        {!event.areSeatsAvailable ? <i className={'fa-solid fa-circle-xmark'} style={{ color: 'yellow' }} /> : ''}
+        {!event.areSeatsAvailable ? <i className={'fa-solid fa-circle-xmark'} style={{ color: '#ececab' }} /> : ''}
         {isRegistered ? (
           <div className='registered'>
             <i className={'fa-solid fa-circle-check'} />
@@ -69,7 +69,7 @@ const Card = ({ event, isBookmarked, bookmarkHandler, isEventPage }) => {
         ) : (
           <p></p>
         )}
-        {event.areSeatsAvailable ? <p></p> : <p style={{ color: 'yellow', fontSize: 15 }}>No Seats Available</p>}
+        {event.areSeatsAvailable ? <p></p> : <p style={{ color: '#ececab', fontSize: 15 }}>No Seats Available</p>}
         <i
           className={event.isBookmarked || isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'}
           style={{ color: 'orange' }}
