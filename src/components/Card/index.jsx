@@ -62,7 +62,7 @@ const Card = ({ event, isBookmarked, bookmarkHandler, isEventPage }) => {
         {isRegistered ? (
           <div className='registered'>
             <i className={'fa-solid fa-circle-check'} />
-            <p className={'event-card-registration'} style={{ color: 'green', fontSize: 15 }}>
+            <p className={'event-card-registration'} style={{ color: '#a0f3ad', fontSize: 15 }}>
               Registered
             </p>
           </div>
@@ -72,7 +72,7 @@ const Card = ({ event, isBookmarked, bookmarkHandler, isEventPage }) => {
         {event.areSeatsAvailable ? <p></p> : <p style={{ color: '#ececab', fontSize: 15 }}>No Seats Available</p>}
         <i
           className={event.isBookmarked || isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'}
-          style={{ color: 'orange' }}
+          style={{ color: '#ea8282' }}
           onClick={() => {
             bookmarkHandler(event.id);
           }}

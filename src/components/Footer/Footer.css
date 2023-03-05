@@ -46,4 +46,6 @@
   background-color: #fff;
   height: 40px;
   width: 100px;
+  outline: none;
+  border: none;
 }
