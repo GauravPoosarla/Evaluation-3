@@ -25,6 +25,9 @@ const Body = () => {
 
   useEffect(() => {
     makeRequest(GET_EVENTS_DATA()).then(response => {
+      response.sort((a, b) => {
+        return new Date(a.datetime) - new Date(b.datetime);
+      });
       setEventData(response);
       setEventDataState(response);
     });

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 import makeRequest from '../../utils/makeRequest';
 import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
 
-const Card = ({ event, bookmarkHandler, isEventPage }) => {
+const Card = ({ event, isBookmarked, bookmarkHandler, isEventPage }) => {
   const [isRegistered, setIsRegistered] = useState(event.isRegistered);
 
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const Card = ({ event, bookmarkHandler, isEventPage }) => {
         )}
         {event.areSeatsAvailable ? <p></p> : <p style={{ color: 'yellow', fontSize: 15 }}>No Seats Available</p>}
         <i
-          className={event.isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'}
+          className={event.isBookmarked || isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'}
           style={{ color: 'orange' }}
           onClick={() => {
             bookmarkHandler(event.id);
