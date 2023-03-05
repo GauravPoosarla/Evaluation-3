@@ -2,6 +2,7 @@ import React from 'react';
 import Homepage from './pages/Homepage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { EventDataProvider } from './contexts/EventData';
+import { ThemeProvider } from './contexts/Theme';
 import './App.css';
 
 function App() {
@@ -12,10 +13,11 @@ function App() {
           <Route
             path='/'
             element={
-              <EventDataProvider>
-                {' '}
-                <Homepage />
-              </EventDataProvider>
+              <ThemeProvider>
+                <EventDataProvider>
+                  <Homepage />
+                </EventDataProvider>
+              </ThemeProvider>
             }
           />
         </Routes>

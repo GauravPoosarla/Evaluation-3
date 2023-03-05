@@ -6,7 +6,7 @@ import Card from '../Card';
 import { EventDataContext } from '../../contexts/EventData';
 import makeRequest from '../../utils/makeRequest';
 import { GET_EVENTS_DATA, UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
-
+import { Theme } from '../../contexts/Theme';
 import './Body.css';
 
 const Body = () => {
@@ -19,6 +19,9 @@ const Body = () => {
   const [filterClicked, setFilterClicked] = useState(false);
   const { eventData, setEventData } = useContext(EventDataContext);
   const [eventDataState, setEventDataState] = useState([]);
+
+  const { theme } = useContext(Theme);
+  const { currTheme } = theme;
 
   useEffect(() => {
     makeRequest(GET_EVENTS_DATA()).then(response => {
@@ -68,17 +71,17 @@ const Body = () => {
     if (event.target.value === 'all') {
       setEventDataState(eventData);
     } else if (event.target.value === 'Registered') {
-      setEventDataState(eventData.filter(event => event.isRegistered));
+      setEventDataState(eventDataState.filter(event => event.isRegistered));
     } else if (event.target.value === 'Bookmarked') {
-      setEventDataState(eventData.filter(event => event.isBookmarked));
+      setEventDataState(eventDataState.filter(event => event.isBookmarked));
     } else if (event.target.value === 'Seats Available') {
-      setEventDataState(eventData.filter(event => event.areSeatsAvailable));
+      setEventDataState(eventDataState.filter(event => event.areSeatsAvailable));
     }
   };
 
   return (
     <div className='body'>
-      <div className='body-header'>
+      <div className='body-header' style={{ color: currTheme }}>
         <div className='body-header-left'>
           <i className='fa-solid fa-filter'> </i>
           <p>FILTER</p>
