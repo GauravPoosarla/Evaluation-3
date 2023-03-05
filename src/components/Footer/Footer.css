@@ -33,22 +33,6 @@
   font-family: 'Sofia Sans', sans-serif;
 }
 
-.theme-purple{
-  background-color: purple;
-}
-
-.theme-black{
-  background-color: #000;
-}
-
-.theme-blue{
-  background-color: #00f;
-}
-
-.theme-gray{
-  background-color: #ccc;
-}
-
 .theme-color{
   border: 1px solid #fff;
   height: 40px;
