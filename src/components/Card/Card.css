@@ -96,3 +96,87 @@
   gap: 5px;
   color: green;
 }
+
+.event-details .event-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 450px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  color: white;
+  border-radius: 10px;
+}
+
+.event-details .event-card-image img{
+  width: 300px;
+  height: 200px;
+  border-bottom: 0.5px solid white;
+  border-radius: 10px 10px 0 0;
+}
+
+.event-details .event-card-content {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.event-details .event-card-content-name {
+  height: 30px;
+  font-family: 'Big Shoulders Text', cursive;
+  font-size: 20px;
+  text-align: center;
+}
+
+.event-details .event-card-content-description {
+  height: 100px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.event-details .event-card-content-venue {
+  height: 10px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.event-details .event-card-content-date {
+  height: 10px;
+  font-family: 'Sofia Sans', sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+.event-details .event-card-footer {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.register-button {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+
+.register-button button {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 10px;
+  background-color: white;
+  outline: none;
+  border: none;
+}

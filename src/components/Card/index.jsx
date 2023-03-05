@@ -4,10 +4,15 @@ import { useState } from 'react';
 import './Card.css';
 import PropTypes from 'prop-types';
 import { Theme } from '../../contexts/Theme';
+import { useNavigate } from 'react-router';
+import makeRequest from '../../utils/makeRequest';
+import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
 
-const Card = ({ event, bookmarkHandler }) => {
+const Card = ({ event, bookmarkHandler, isEventPage }) => {
+  const [isRegistered, setIsRegistered] = useState(event.isRegistered);
+
+  const navigate = useNavigate();
   const date = new Date(event.datetime);
-  // include timezone in date
   const localDate = date.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
@@ -20,12 +25,24 @@ const Card = ({ event, bookmarkHandler }) => {
   const { theme } = React.useContext(Theme);
   const { currTheme } = theme;
 
+  const registrationHandler = () => {
+    if (isRegistered) {
+      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isRegistered: false } }).then(res => {
+        setIsRegistered(false);
+      });
+    } else if (event.areSeatsAvailable) {
+      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isRegistered: true } }).then(res => {
+        setIsRegistered(true);
+      });
+    }
+  };
+
   return (
     <div className='event-card' style={{ backgroundColor: currTheme }}>
       <div
         className='event-card-image'
         onClick={() => {
-          console.log('clicked');
+          navigate(`/events/${event.id}`);
         }}>
         <img src={event.imgUrl} alt={event.name} />
       </div>
@@ -42,7 +59,7 @@ const Card = ({ event, bookmarkHandler }) => {
       </div>
       <div className='event-card-footer'>
         {!event.areSeatsAvailable ? <i className={'fa-solid fa-circle-xmark'} style={{ color: 'yellow' }} /> : ''}
-        {event.isRegistered ? (
+        {isRegistered ? (
           <div className='registered'>
             <i className={'fa-solid fa-circle-check'} />
             <p className={'event-card-registration'} style={{ color: 'green', fontSize: 15 }}>
@@ -61,6 +78,13 @@ const Card = ({ event, bookmarkHandler }) => {
           }}
         />
       </div>
+      {isEventPage ? (
+        <div className='register-button'>
+          <button onClick={registrationHandler}>{isRegistered ? 'Unregister' : 'Register'}</button>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

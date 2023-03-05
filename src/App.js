@@ -1,5 +1,6 @@
 import React from 'react';
 import Homepage from './pages/Homepage';
+import EventPage from './pages/EventPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { EventDataProvider } from './contexts/EventData';
 import { ThemeProvider } from './contexts/Theme';
@@ -16,6 +17,16 @@ function App() {
               <ThemeProvider>
                 <EventDataProvider>
                   <Homepage />
+                </EventDataProvider>
+              </ThemeProvider>
+            }
+          />
+          <Route
+            path='/events/:id'
+            element={
+              <ThemeProvider>
+                <EventDataProvider>
+                  <EventPage />
                 </EventDataProvider>
               </ThemeProvider>
             }
