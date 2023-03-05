@@ -5,11 +5,17 @@ import { useState, useContext, useEffect } from 'react';
 import Card from '../Card';
 import { EventDataContext } from '../../contexts/EventData';
 import makeRequest from '../../utils/makeRequest';
-import { GET_EVENTS_DATA } from '../../constants/apiEndPoints';
+import { GET_EVENTS_DATA, UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
 
 import './Body.css';
 
 const Body = () => {
+  const [isRegistered, setIsRegistered] = useState({});
+  const [isBookmarked, setIsBookmarked] = useState({});
+
+  const [input, setInput] = useState('');
+  const [searchClicked, setSearchClicked] = useState(false);
+
   const [filterClicked, setFilterClicked] = useState(false);
   const { eventData, setEventData } = useContext(EventDataContext);
   const [eventDataState, setEventDataState] = useState([]);
@@ -20,6 +26,39 @@ const Body = () => {
       setEventDataState(response);
     });
   }, []);
+
+  const inputHandler = event => {
+    setInput(event.target.value);
+  };
+
+  const searchHandler = () => {
+    if (input.trim() === '') {
+      setEventDataState(eventData);
+      return;
+    }
+    setEventDataState(eventData.filter(event => event.name.toLowerCase().includes(input.toLowerCase())));
+  };
+
+  for (let i = 0; i < eventData.length; i++) {
+    isRegistered[eventData[i].id] = eventData[i].isRegistered;
+    isBookmarked[eventData[i].id] = eventData[i].isBookmarked;
+  }
+
+  const bookmarkHandler = id => {
+    makeRequest(UPDATE_EVENT_DATA(id), { data: { isBookmarked: !isBookmarked[id] } }).then(response => {
+      const duplicateBookmarked = { ...isBookmarked };
+      duplicateBookmarked[id] = !duplicateBookmarked[id];
+      setIsBookmarked(duplicateBookmarked);
+
+      const duplicateEventData = [...eventData];
+      for (let i = 0; i < duplicateEventData.length; i++) {
+        if (duplicateEventData[i].id === id) {
+          duplicateEventData[i].isBookmarked = duplicateBookmarked[id];
+        }
+      }
+      setEventData(duplicateEventData);
+    });
+  };
 
   const filterClickHandler = () => {
     setFilterClicked(!filterClicked);
@@ -47,8 +86,8 @@ const Body = () => {
           {!filterClicked && <i className='fa-solid fa-chevron-down' onClick={filterClickHandler}></i>}
         </div>
         <div className='body-header-right'>
-          <input className='search' type='text' placeholder='Event Name' />
-          <i className='fa-solid fa-search'></i>
+          <input className='search' type='text' placeholder='Event Name' onChange={inputHandler} />
+          <i className='fa-solid fa-search' onClick={searchHandler}></i>
         </div>
       </div>
       <div className='body-filter'>
@@ -79,7 +118,7 @@ const Body = () => {
       </div>
       <div className='body-content'>
         {eventDataState.map(event => (
-          <Card key={event.id} event={event} />
+          <Card key={event.id} event={event} bookmarkHandler={bookmarkHandler} />
         ))}
       </div>
     </div>

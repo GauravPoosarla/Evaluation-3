@@ -4,39 +4,8 @@ import { useState } from 'react';
 import { getFormattedDateFromUtcDate } from '../../utils/common';
 import './Card.css';
 import PropTypes from 'prop-types';
-import makeRequest from '../../utils/makeRequest';
-import { UPDATE_EVENT_DATA } from '../../constants/apiEndPoints';
 
-const Card = ({ event }) => {
-  const [isBookmarked, setIsBookmarked] = useState(event.isBookmarked);
-  const [isChecked, setIsChecked] = useState(event.isRegistered);
-
-  const bookmarkHandler = () => {
-    if (!isBookmarked) {
-      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isBookmarked: true } }).then(response => {
-        setIsBookmarked(!isBookmarked);
-      });
-    } else {
-      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isBookmarked: false } }).then(response => {
-        setIsBookmarked(!isBookmarked);
-      });
-    }
-    // window.location.reload();
-  };
-
-  const checkHandler = () => {
-    if (!isChecked) {
-      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isRegistered: true } }).then(response => {
-        setIsChecked(!isChecked);
-      });
-    } else {
-      makeRequest(UPDATE_EVENT_DATA(event.id), { data: { isRegistered: false } }).then(response => {
-        setIsChecked(!isChecked);
-      });
-    }
-    // window.location.reload();
-  };
-
+const Card = ({ event, bookmarkHandler }) => {
   return (
     <div className='event-card' style={{ backgroundColor: 'black' }}>
       <div
@@ -58,14 +27,10 @@ const Card = ({ event }) => {
         </p>
       </div>
       <div className='event-card-footer'>
-        {!event.areSeatsAvailable ? (
-          <i className={'fa-solid fa-circle-xmark'} style={{ color: 'yellow' }} onClick={checkHandler} />
-        ) : (
-          ''
-        )}
+        {!event.areSeatsAvailable ? <i className={'fa-solid fa-circle-xmark'} style={{ color: 'yellow' }} /> : ''}
         {event.isRegistered ? (
           <div className='registered'>
-            <i className={'fa-solid fa-circle-check'} onClick={checkHandler} />
+            <i className={'fa-solid fa-circle-check'} />
             <p className={'event-card-registration'} style={{ color: 'green' }}>
               Registered
             </p>
@@ -74,7 +39,12 @@ const Card = ({ event }) => {
           <p></p>
         )}
         {event.areSeatsAvailable ? <p></p> : <p style={{ color: 'yellow' }}>Seats Unavailable</p>}
-        <i className={isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'} onClick={bookmarkHandler} />
+        <i
+          className={event.isBookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'}
+          onClick={() => {
+            bookmarkHandler(event.id);
+          }}
+        />
       </div>
     </div>
   );

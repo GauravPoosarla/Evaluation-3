@@ -11,10 +11,10 @@
   align-items: center;
   margin-bottom: 20px;
 }
+
 .body-header-left{
   display: flex;
   gap: 5px;
-  margin-bottom: 20px;
 }
 
 .body-header-left p {
